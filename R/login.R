@@ -21,7 +21,8 @@ loginUI <- function(id,
                     pass_title = "Password",
                     login_title = "Log in",
                     login_btn_class = "btn-primary",
-                    error_message = "Invalid username or password!",
+                    error_message_user = "User does not exist",
+                    error_message_pwd = "Password does not match",
                     additional_ui = NULL,
                     cookie_expiry = 7) {
   ns <- shiny::NS(id)
@@ -45,9 +46,19 @@ loginUI <- function(id,
         additional_ui,
         shinyjs::hidden(
           shiny::div(
-            id = ns("error"),
+            id = ns("error_user"),
             shiny::tags$p(
-              error_message,
+              error_message_user,
+              style = "color: red; font-weight: bold; padding-top: 5px;",
+              class = "text-center"
+            )
+          )
+        ),
+        shinyjs::hidden(
+          shiny::div(
+            id = ns("error_pwd"),
+            shiny::tags$p(
+              error_message_pwd,
               style = "color: red; font-weight: bold; padding-top: 5px;",
               class = "text-center"
             )
