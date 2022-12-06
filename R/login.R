@@ -244,9 +244,12 @@ loginServer <- function(id,
             }
           }
           
-        } else { # if not valid temporarily show error message to user
-          shinyjs::toggle(id = "error", anim = TRUE, time = 1, animType = "fade")
-          shinyjs::delay(5000, shinyjs::toggle(id = "error", anim = TRUE, time = 1, animType = "fade"))
+        } else if (length(row_username) != 1) { # if not valid temporarily show error message to user
+          shinyjs::toggle(id = "error_user", anim = TRUE, time = 1, animType = "fade")
+          shinyjs::delay(3000, shinyjs::toggle(id = "error", anim = TRUE, time = 1, animType = "fade"))
+        } else if (!password_match) {
+          shinyjs::toggle(id = "error_pwd", anim = TRUE, time = 1, animType = "fade")
+          shinyjs::delay(3000, shinyjs::toggle(id = "error", anim = TRUE, time = 1, animType = "fade"))
         }
       })
       
